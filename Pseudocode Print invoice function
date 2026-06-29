@@ -1,0 +1,28 @@
+void printInvoice (CheckIn_Details PassengerInforList, BookingDetails BookingList[])
+Start printInvoice (details, flight[0])
+Open invoice file
+IF file failed to open then
+	Display “No booking available”
+	Close invoice file
+ELSE
+	Close invoice file
+	Open invoice file for writing 
+	Write “Welcome to CLS Airline Company” 
+	Write “Departure Flight:”,  BookingList[0].departureFlight 
+	Write “Departure Date:”, BookingList[0].departureDate 
+	Write “Departure Slot:” , BookingList[0].departTime 
+	Write “Return Flight:” , BookingList[0].returnFlight 
+	Write “Return Date:” , BookingList[0].returnDate 
+	Write “Return Slot:” , BookingList[0].returnTime 
+	FOR i each noTickets
+		Write “Passenger “, i + 1 
+Write “Name:”, PassengerInfoList.passenger_flight[i].CheckIn_name.first_name, PassengerInfoList.passenger_flight[i].CheckIn_name.last_name 
+Write “Passport Number:”, PassengerInfoList.passenger_flight[i].passport_num i
+Write “Contact Person:”, PassengerInfoList.passenger_flight[i].contact_name.first_name, PassengerInfoList.passenger_flight[i].contact_name.last_name 
+Write “Contact Person Mobile No:”, PassengerInfoList.passenger_flight[i].mobile_num 
+	END FOR
+	Close invoice file
+Display “Invoice printed, please check your folder!”
+END IF
+END printInvoice
+
