@@ -1,0 +1,77 @@
+Main()
+BEGIN main
+    Initialize userCount to 0
+    Initialize contRL and cont to 1
+    Declare variable for user choice
+    Declare array of users
+    Read registered users into the array
+    DO
+        Display header and main menu (Register, Login, Quit)
+        Prompt user for a choice
+        IF choice is 1 THEN
+            Clear screen
+            Register a new user
+            Refresh user list
+            Ask if user wants to continue with registration/login
+            IF answer is no THEN
+                Say goodbye and EXIT
+        ELSE IF choice is 2 THEN
+            Refresh user list
+            Call login function with current user
+            SWITCH login result:
+                CASE 1:
+                    Successful login → exit loop
+                CASE 2:
+                    Incorrect password → show message
+                CASE 3:
+                    Incorrect username → show message
+                CASE 4:
+                    Both incorrect → show message
+            IF login failed THEN
+                Suggest registering
+                Ask if want to continue
+                IF answer is no THEN
+                    Clear screen, say goodbye, and EXIT
+        ELSE IF choice is 3 THEN
+            Say goodbye and EXIT
+        ELSE
+            Handle invalid input
+        END IF
+        Clear screen
+    WHILE contRL is 1
+    DO
+        Clear screen and display logged-in user menu
+        Show booking, editing, payment, check-in, invoice, quit options
+        Read booking and check-in data
+        Get validated menu selection
+        SWITCH selection:
+            CASE 1:
+                Book ticket and store booking
+            CASE 2:
+                Edit existing booking
+            CASE 3:
+                IF no booking → show error
+                ELSE IF already paid → show error
+                ELSE → process payment
+            CASE 4:
+                IF no booking → show error
+                ELSE IF not paid → show error
+                ELSE IF already checked in → show error
+                ELSE → perform check-in
+            CASE 5:
+                IF no booking → show error
+                ELSE IF not paid → show error
+                ELSE IF not checked in → show error
+                ELSE → print invoice
+            CASE 6:
+                Clear screen, say goodbye, set cont to 0 to exit loop
+            DEFAULT:
+                Show not available message
+        IF selection is 1 or 2 THEN
+            IF booking file exists THEN
+                Create payment/check-in/invoice file
+            END IF
+        END IF
+    WHILE cont is 1
+    RETURN 0
+END main
