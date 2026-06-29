@@ -1,0 +1,70 @@
+editBooking()
+IF noTickets == 0 THEN
+    DISPLAY "No booking available to edit"
+    PAUSE and CLEAR screen
+    RETURN
+END IF
+DISPLAY flight schedule
+ASK user: "Change Passenger Name (Y/N)?"
+VALIDATE input for 'Y' or 'N'
+IF user chooses 'Y' THEN
+    CLEAR screen
+    DISPLAY "Name Editing"
+    ASK for passenger's first name
+    VALIDATE name input
+    FOR each booking in flight[]
+        IF current passenger's first name matches input THEN
+            ASK for new first and last names
+            VALIDATE both names
+            UPDATE passenger name
+            SET edited = true
+            SET found = true
+            BREAK loop
+        END IF
+    END FOR
+    IF passenger not found THEN
+        DISPLAY "Passenger does not exist"
+        PAUSE and CLEAR screen
+        RETURN
+    END IF
+ELSE IF user chooses 'N' THEN
+    CLEAR screen
+    DISPLAY "Edit Booking Menu"
+    CALL editMenu() to show options
+    READ editChoice
+    SWITCH editChoice:
+        CASE 1: EDIT departure flight
+            VALIDATE flight number (1 to 8)
+            UPDATE and SET edited = true
+        CASE 2: EDIT departure date
+            VALIDATE date is not empty and before return date
+            UPDATE and SET edited = true
+        CASE 3: EDIT departure time slot
+            VALIDATE slot (1 to 4)
+            UPDATE and SET edited = true
+        CASE 4: EDIT return flight
+            VALIDATE flight number (1 to 8)
+            UPDATE and SET edited = true
+        CASE 5: EDIT return date
+            VALIDATE date is not empty and after departure date
+            UPDATE and SET edited = true
+        CASE 6: EDIT return time slot
+            VALIDATE slot (1 to 4)
+            UPDATE and SET edited = true
+        DEFAULT:
+            DISPLAY "Invalid Choice"
+    END SWITCH
+END IF
+IF edited THEN
+    ASK user to confirm save (Y/N)
+    VALIDATE input
+    IF user chooses 'Y' THEN
+        OPEN booking file for currentUser
+        WRITE all flight[] data to file
+        CLOSE file
+        DISPLAY "Booking updated successfully"
+    ELSE
+        DISPLAY "Edit cancelled"
+    END IF
+    PAUSE and CLEAR screen
+END IF
