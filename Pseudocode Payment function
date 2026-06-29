@@ -1,0 +1,46 @@
+void payment()
+START payment()
+Initialize double dpaertticketPrice[9] = { 0, 200, 200, 200, 200, 250, 250, 300, 300 }
+Initialize double returnticketPrice[9] = { 0, 200, 200, 200, 200, 250, 250, 300, 300 }
+Initialize string departFromTo[9] = { "", "KL - Penang", "Penang - KL", "KL - Johor", "Johor - KL", "KL - Singapore", "KL - Singapore", "KL - Bangkok", "Bangkok - KL" }
+Initialize string returnFromTo[9] = { "", "KL - Penang", "Penang - KL", "KL - Johor", "Johor - KL", "KL - Singapore", "KL - Singapore", "KL - Bangkok", "Bangkok - KL" }
+Initialize string departClockTime[9] = { "8:00 A.M.", "1:00 P.M.", "6:00 P.M.", "11:00 P.M." }
+Initialize string returnClockTime[9] = { "8:00 A.M.", "1:00 P.M.", "6:00 P.M.", "11:00 P.M." }
+Initialize  BookingDetails flight_details = flight[0]
+Initialize double TotalPrice = (departticketPrice[flight_details.departureFlight] + returnticketPrice[flight_details.returnFlight]) * noTickets
+Declare char payment, transact
+Display noTickets, flight_details.departureDate, departFromTo[flight_details.departureFlight, departClockTime[flight_details.departTime], flight_details.returnDate, returnFromTo[flight_details.returnFlight], returnClockTime[flight_details.returnTime], departticketPrice[flight_details.departureFlight], returnticketPrice[flight_details.returnFlight], TotalPrice
+Input payment 
+Clear screen
+IF payment == ‘y’ or ‘Y’
+	Declare int payment_option
+Input payment_option
+WHILE payment_option < 1 or > 2
+	    	Input payment_option
+	  	 System clear
+	End while
+	IF payment_option = 1 then
+		Input card_holder, card_num, card_date, card_code
+	ELSE IF payment_option = 2 then
+		declare string bank_account
+		declare int bankname
+		input bankname, bank_account
+	End if
+	Input transact 
+	IF transact == ‘Y’ or ‘y’ then
+OPEN paymentCheckIn file
+		Write TotalPrice to paymentCheckIn
+		Write “Paid” to paymentCheckIn
+		FOR i in range of 6 * noTickets
+			Write “NULL” to paymentCheckIn
+		Write “Not Check” to paymentCheckIn
+		Close paymentCheckIn file 
+		Display “Transaction Completed Successfully!”
+		Display “Payment Status Paid”
+	ELSE 
+		Display “Transaction Cancelled. “
+	End if
+ELSE
+	Display “Back to main menu”
+END IF
+END payment()
