@@ -1,0 +1,20 @@
+void readUser(Registration users[SIZE], int& userCount) 
+    START function
+    DEFINE line as string
+    OPEN file "user.txt" FOR reading
+    SET userCount TO 0
+    IF file is open THEN
+        WHILE not end of file DO
+            READ first_name from file
+            READ last_name from file
+            READ mobile_number from file
+            READ email from file
+            READ username from file
+            READ password from file
+            STORE all read data into users[userCount]
+            INCREMENT userCount by 1
+        END WHILE
+        CLOSE file
+    ELSE // Do nothing
+    END IF
+END FUNCTION
