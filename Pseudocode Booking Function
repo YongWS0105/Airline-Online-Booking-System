@@ -1,0 +1,60 @@
+performBooking()
+Function performBooking:
+    Declare variables:
+        confirmBooking (char)
+        noTickets (int)
+        maxTickets = 20
+        flight[20] as BookingDetails array
+    Call FlightSchedule()
+    Prompt user: "Number of Passenger(s):"
+    Input noTickets
+    While noTickets is invalid (non-number, ≤ 0, or > maxTickets):
+        Display error and re-prompt
+    Clear screen
+    Call FlightSchedule()
+    Prompt user for shared flight details:
+        Input sharedDepartureFlight (1–8)
+        While invalid, re-prompt
+        Input sharedDepartureDate
+        While empty or invalid, re-prompt
+        Input sharedDepartTime (1–4)
+        While invalid, re-prompt
+        Input sharedReturnFlight (1–8)
+        While invalid or not matching destination, re-prompt
+        Input sharedReturnDate
+        While empty or not after departure date, re-prompt
+        Input sharedReturnTime (1–4)
+        While invalid, re-prompt
+    For each passenger from 1 to noTickets:
+        Clear screen
+        Call FlightSchedule()
+        Prompt: "First name:"
+        Input first_name
+        While empty or non-alphabetic, re-prompt
+        Prompt: "Last name:"
+        Input last_name
+        While empty or non-alphabetic, re-prompt
+
+        Assign shared flight details to flight[i]
+    Display summary of all passenger bookings
+    Repeat:
+        Prompt: "Confirm booking? (Y/N)"
+        Input confirmBooking
+        If confirmBooking is 'Y' or 'y':
+            Open booking file for appending
+            If file fails:
+                Show error
+            Else:
+                Write each passenger's details to file
+                Display "Booking successfully recorded."
+                Close file
+            Exit loop
+        Else if confirmBooking is 'N' or 'n':
+            Display "Booking is canceled!"
+            Exit loop
+        Else:
+            Show invalid input message
+    Prompt user to press enter to return to main menu
+    Wait for input
+    Clear screen
+End Function
