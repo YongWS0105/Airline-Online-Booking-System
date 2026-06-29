@@ -1,0 +1,106 @@
+registration()
+START function
+DEFINE first_name, last_name, mobile_number, email, username, password1, password2 as string
+DEFINE confirm, choice as char
+DEFINE notEqualCount as int
+    DO
+        DISPLAY header and registration prompt
+        DO  // First Name
+            PROMPT user for first name
+            IF first name is empty THEN
+                DISPLAY error: "It cannot be blank"
+                CONTINUE
+            IF first name contains non-letters THEN
+                DISPLAY error: "Name must contain only letters"
+                CONTINUE
+        WHILE input is invalid
+        FORMAT first name
+        DO // Last Name
+            PROMPT user for last name
+            IF last name is empty THEN
+                DISPLAY error
+                CONTINUE
+            IF last name contains non-letters THEN
+                DISPLAY error
+                CONTINUE
+        WHILE input is invalid
+        FORMAT last name
+        DO // Mobile Number
+            PROMPT user for mobile number
+            IF input contains non-digits THEN
+                DISPLAY error
+                CONTINUE
+            IF number format is invalid THEN
+                IF not starting with "01" THEN
+                    DISPLAY error
+                    CONTINUE
+                IF starts with "011" AND length is not 11 THEN
+                    DISPLAY error
+                    CONTINUE
+                IF not "011" AND length is not 10 THEN
+                    DISPLAY error
+                    CONTINUE
+        WHILE input is invalid
+        DO // Email
+            PROMPT user for email
+            IF email is empty THEN
+                DISPLAY error
+                CONTINUE
+            IF email format is invalid THEN
+                DISPLAY error
+                CONTINUE
+        WHILE input is invalid
+        DO// Username
+            PROMPT user for username
+            IF username is empty THEN
+                DISPLAY error
+                CONTINUE
+            IF username contains non-letters THEN
+                DISPLAY error
+                CONTINUE
+            IF username is a duplicate THEN
+                DISPLAY error
+                CONTINUE
+        WHILE input is invalid
+        DO // Password
+            DO
+                PROMPT user for password
+                IF password is not strong THEN
+                    DISPLAY error
+            WHILE password is not strong
+            SET attempt count TO 0
+            DO
+                PROMPT user to re-enter password
+                IF passwords do not match THEN
+                    INCREMENT attempt count
+                    DISPLAY error
+                    IF attempt count == 3 THEN
+                        DISPLAY error
+                        BREAK
+            WHILE passwords do not match AND attempts < 3
+        WHILE attempt count == 3
+        DO // Confirm Registration
+            PROMPT "Confirm to register? (y/n)"
+            IF confirm is 'y' THEN
+                APPEND user data to "user.txt"
+                DISPLAY "Registration done"
+            ELSE IF confirm is 'n' THEN
+                DISPLAY "Registration cancelled"
+                DO
+                    PROMPT "Register again or quit? (r/q)"
+                    IF input is 'q' THEN
+                        DISPLAY "Quitting..."
+                        RETURN
+                    ELSE IF input is 'r' THEN
+                        DISPLAY "Returning to registration..."
+                        BREAK
+                    ELSE
+                        DISPLAY "Invalid input"
+                WHILE input is not 'q' or 'r'
+            ELSE
+                DISPLAY "Invalid choice"
+        WHILE confirm is not 'y' or 'n'
+
+        CLEAR screen
+    WHILE confirm is 'n'
+END FUNCTION
