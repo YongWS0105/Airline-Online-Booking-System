@@ -1,0 +1,60 @@
+void checkIn(CheckIn_Details& details)
+START checkIn(details)
+Declare char checkInConfirmation
+Display “Payment Status: Paid”
+Display “~Proceed to check in~”
+FOR each passenger from 0 to (noTickets – 1)
+	Display “Passenger”, i + 1
+	DO
+Input details.passenger_flight[i].CheckIn_name.first_name,
+Validate details.passenger_flight[i].CheckIn_name.first_name
+IF invalid then
+	Display error message
+	WHILE details.passenger_flight[i].CheckIn_name.first_name is VALID
+	END DOWHILE
+	DO
+Input details.passenger_flight[i].CheckIn_name.last_name 
+Validate details.passenger_flight[i].CheckIn_name.last_name
+IF invalid then
+	Display error message
+	WHILE details.passenger_flight[i].CheckIn_name.first_name is VALID
+ 	END DOWHILE
+
+DO 
+Input details.passenger_flight[i].passport_num 
+Validate details.passenger_flight[i].passport_num
+IF invalid then
+	Display error message
+WHILE details.passenger_flight[i].passport_num is VALID
+END DOWHILE
+IF i = 0
+Input details.passenger_flight[i].contact_name.first_name, details.passenger_flight[i].contact_name.last_name, details.passenger_flight[i].mobile_num
+	ELSE
+		Declare char reuse
+		input reuse
+		IF reuse = ‘y’ or ‘Y’
+			IF i > 1 
+				Declare int contactChoice
+				Input contactChoice
+details.passenger_flight[i].contact_name = details.passenger_flight[contactChoice - 1].contact_name;
+details.passenger_flight[i].mobile_num = details.passenger_flight[contactChoice - 1].mobile_num;
+			ELSE
+details.passenger_flight[i].contact_name = details.passenger_flight[0].contact_name;
+details.passenger_flight[i].mobile_num = details.passenger_flight[0].mobile_num;
+		ELSE
+input details.passenger_flight[i].contact_name.first_name, details.passenger_flight[i].contact_name.last_name, details.passenger_flight[i].mobile_num
+	Input checkInConfirmation
+	IF checkInConfirmation == ‘y’ or ‘Y’
+		System clear
+		details.checkIn_status = “Checked”
+		OPEN paymentCheckIn file for writing
+		Write details.total_price, details.payment_status
+		FOR each noTickets
+Write details.passenger_flight[i].CheckIn_name.first_name, details.passenger_flight[i].CheckIn_name.last_name, details.passenger_flight[i].passport_num, details.passenger_flight[i].contact_name.first_name, details.passenger_flight[i].contact_name.last_name, details.passenger_flight[i].mobile_num in checkInPayment
+		Write details.checkIn_status 
+		checkInPayment.close()
+	ELSE
+		Display “Back to main menu”
+	END IF
+Close paymentCheckIn file
+END checkIn()
