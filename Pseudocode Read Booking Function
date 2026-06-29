@@ -1,0 +1,20 @@
+readBooking()
+OPEN booking file for currentUser
+IF file fails to open THEN
+    // Do nothing (noTickets remains unchanged)
+ELSE
+    SET noTickets = 0
+    WHILE not end of file
+        READ first name
+        IF first name is empty THEN BREAK
+        READ last name
+        READ departure flight
+        READ departure date
+        READ departure time
+        READ return flight
+        READ return date
+        READ return time
+        INCREMENT noTickets
+    END WHILE
+    CLOSE file
+END IF
