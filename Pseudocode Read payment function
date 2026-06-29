@@ -1,0 +1,22 @@
+void readPaymentCheckIn(CheckIn_Details details)
+START readPaymentCheckIn(details)
+Open paymentCheckIn file for read
+IF paymentCheckIn file does not exist
+RETURN
+ELSE
+READ details.total_price from paymentCheckIn 
+Ignore newline character
+Read details.payment status from paymentCheckIn
+FOR each noTickets
+Read details.passenger_flight[i].CheckIn_name.first_name
+Read details.passenger_flight[i].CheckIn_name.last_name
+Read details.passenger_flight[i].passport_num
+Read details.passenger_flight[i].contact_name.first_name
+Read details.passenger_flight[i].CheckIn_name.last_name
+Read details.passenger_flight[i].contact_name.last_name	
+Read details.passenger_flight[i].mobile_num
+Read checkin_status from paymentCheckIn
+END For
+END IF
+Close paymentCheckIn file
+END readpaymentCheckIn(details)
