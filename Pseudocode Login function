@@ -1,0 +1,34 @@
+int login(Registration users[SIZE], int& userCount, string& currentUser)
+START function
+DEFINE inputUserName, inputPassword as string
+    CLEAR the screen
+    DISPLAY login header and formatting
+    PROMPT user to enter username
+    READ inputUserName
+    PROMPT user to enter password
+    READ inputPassword
+    SET usernameFound TO false
+    SET passwordCorrect TO false
+    FOR i FROM 0 TO userCount - 1 DO
+IF users[i].username EQUALS inputUserName AND users[i].password EQUALS inputPassword  THEN
+            SET currentUser TO inputUserName
+            DISPLAY "Login Successfully!"
+            DISPLAY "Welcome, currentUser!"
+            CALL clearline("Redirecting to the login page...")
+            RETURN 1  // Login successful
+        END IF
+        IF users[i].username EQUALS inputUserName THEN
+            SET usernameFound TO true
+        END IF
+        IF users[i].password EQUALS inputPassword THEN
+            SET passwordCorrect TO true
+        END IF
+    END FOR
+    IF usernameFound IS true THEN
+        RETURN 2  // Username exists but password is incorrect
+    ELSE IF passwordCorrect IS true THEN
+        RETURN 3  // Password correct but username is incorrect
+    ELSE
+        RETURN 4  // Both username and password are incorrect
+    END IF
+END FUNCTION
